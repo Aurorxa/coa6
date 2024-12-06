@@ -33,9 +33,23 @@ hero:
       text: "🏠首页"
       link: "/"        
     - theme: alt
-      text: "🎉快速开始"
+      text: "C 语言"
       link: "/01_c/01_c-basic/01_xdx/"
-
+    - theme: alt
+      text: "数据结构和算法"
+      link: "/02_dsa/"
+    - theme: alt
+      text: "计算机组成原理"
+      link: "/03_cma/"
+    - theme: alt
+      text: "操作系统"
+      link: "/04_os/"
+    - theme: alt
+      text: "计算机网络"
+      link: "/05_net/"
+    - theme: alt
+      text: "设计模式"
+      link: "/06_dp/"                        
 # 按钮下方的描述
 features:
   - icon: 🧠

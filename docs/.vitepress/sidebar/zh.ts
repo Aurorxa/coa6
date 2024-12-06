@@ -2,9 +2,9 @@ import { DefaultTheme } from 'vitepress'
 import { commonDirectoryName } from '../utils/constant'
 // 中文侧边栏
 export const zhSidebar: DefaultTheme.Sidebar = {
-  '/': [
+  '/01_c': [
     {
-      text: 'C 语言',
+      text: 'C 语言基础',
       collapsed: true,
       items: [
         { text: '计算机软件常识科普', link: `/01_c/01_c-basic/01_${commonDirectoryName}/` },
@@ -16,6 +16,12 @@ export const zhSidebar: DefaultTheme.Sidebar = {
         { text: '进制', link: `/01_c/01_c-basic/07_${commonDirectoryName}/` },
         { text: '数据类型', link: `/01_c-basic/08_${commonDirectoryName}/` },
         { text: '运算符', link: `/01_c-basic/09_${commonDirectoryName}/` },
+      ]
+    },
+    {
+      text: 'C 语言进阶',
+      collapsed: true,
+      items: [
         { text: 'C 语言中的字符集', link: `/01_c/01_c-basic/10_${commonDirectoryName}/` },
         { text: '格式化输入输出', link: `/01_c/02_c-leap/01_${commonDirectoryName}/` },
         { text: '虚拟地址空间', link: `/01_c/02_c-leap/02_${commonDirectoryName}/` },
@@ -27,6 +33,12 @@ export const zhSidebar: DefaultTheme.Sidebar = {
         { text: '指针二', link: `/01_c/02_c-leap/08_${commonDirectoryName}/` },
         { text: '指针三', link: `/01_c/02_c-leap/09_${commonDirectoryName}/` },
         { text: '字符串', link: `/01_c/02_c-leap/10_${commonDirectoryName}/` },
+      ]
+    },
+    {
+      text: 'C 语言高级',
+      collapsed: true,
+      items: [
         { text: '函数一', link: `/01_c/03_c-senior/01_${commonDirectoryName}/` },
         { text: '函数二', link: `/01_c/03_c-senior/02_${commonDirectoryName}/` },
         { text: '变量', link: `/01_c/03_c-senior/03_${commonDirectoryName}/` },
@@ -38,37 +50,52 @@ export const zhSidebar: DefaultTheme.Sidebar = {
         { text: '内存管理', link: `/01_c/03_c-senior/09_${commonDirectoryName}/` },
         { text: '文件操作', link: `/01_c/03_c-senior/10_${commonDirectoryName}/` },
       ]
-    },
+    }
+  ],
+  '/02_dsa/': [
     {
-      text: '数据结构和算法',
+      text: '数据结构和算法基础',
       collapsed: true,
       items: [
-      ]
-    },
-    {
-      text: '计算机组成原理',
-      collapsed: true,
-      items: [
-
-      ]
-    },
-    {
-      text: '操作系统',
-      collapsed: true,
-      items: [
-      ]
-    },
-    {
-      text: '计算机网络',
-      collapsed: true,
-      items: [
-      ]
-    },
-    {
-      text: '设计模式',
-      collapsed: true,
-      items: [
+        { text: 'abc', link: `/02_dsa/` },
       ]
     },
   ],
+  '/03_cma/': [
+    {
+      text: '计算机组成原理基础',
+      collapsed: true,
+      items: [
+        { text: 'abc', link: `/03_cma/` },
+      ]
+    },
+  ],
+  '/04_os/': [
+    {
+      text: '操作系统基础',
+      collapsed: true,
+      items: [
+        { text: 'abc', link: `/04_os/` },
+      ]
+    },
+  ],
+  '/05_net/': [
+    {
+      text: '计算机网络基础',
+      collapsed: true,
+      items: [
+        { text: 'abc', link: `/05_net/` },
+      ]
+    },
+  ],
+  '/06_dp/': [
+    {
+      text: '设计模式基础',
+      collapsed: true,
+      items: [
+        { text: 'abc', link: `/06_dp/` },
+      ]
+    },
+
+  ]
 }
