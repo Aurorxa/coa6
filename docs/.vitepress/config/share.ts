@@ -105,5 +105,10 @@ export const sharedConfig = defineConfig({
   },
   themeConfig: { // 主题设置
     logo: '/logo.svg',  // 左上角logo
-  }
+    editLink: {
+      pattern: 'https://github.com/Aurorxa/coa6/edit/master/docs/:path',
+      text: 'Edit this page on GitHub'
+    }
+  },
+
 })
