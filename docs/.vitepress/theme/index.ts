@@ -73,10 +73,10 @@ export default {
     )
     // giscus配置
     giscusTalk({
-      repo: 'Aurorxa/c', //仓库
-      repoId: 'R_kgDONXPdBg', //仓库ID
+      repo: 'Aurorxa/coa6', //仓库
+      repoId: 'R_kgDONZvU9g', //仓库ID
       category: 'Announcements', // 讨论分类
-      categoryId: 'DIC_kwDONXPdBs4CkzEP', //讨论分类ID
+      categoryId: 'DIC_kwDONZvU9s4ClC9U', //讨论分类ID
       mapping: 'pathname',
       inputPosition: 'bottom',
       lang: 'zh-CN',
