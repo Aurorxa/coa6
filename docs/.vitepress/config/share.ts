@@ -108,7 +108,11 @@ export const sharedConfig = defineConfig({
     editLink: {
       pattern: 'https://github.com/Aurorxa/coa6/edit/master/docs/:path',
       text: 'Edit this page on GitHub'
-    }
+    },
+    //社交链接
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/Aurorxa/coa6' },
+    ],
   },
 
 })
