@@ -16,13 +16,13 @@ export const zhSidebar: DefaultTheme.Sidebar = {
         { text: '进制', link: `/01_c/01_c-basic/07_${commonDirectoryName}/` },
         { text: '数据类型', link: `/01_c/01_c-basic/08_${commonDirectoryName}/` },
         { text: '运算符', link: `/01_c/01_c-basic/09_${commonDirectoryName}/` },
+        { text: 'C 语言中的字符集', link: `/01_c/01_c-basic/10_${commonDirectoryName}/` },
       ]
     },
     {
       text: 'C 语言进阶',
       collapsed: true,
       items: [
-        { text: 'C 语言中的字符集', link: `/01_c/01_c-basic/10_${commonDirectoryName}/` },
         { text: '格式化输入输出', link: `/01_c/02_c-leap/01_${commonDirectoryName}/` },
         { text: '虚拟地址空间', link: `/01_c/02_c-leap/02_${commonDirectoryName}/` },
         { text: '流程控制', link: `/01_c/02_c-leap/03_${commonDirectoryName}/` },
