@@ -9,12 +9,191 @@
 > * ① `数组指针`是`指针变量`，即：指向数组的指针变量，而不是数组。
 > * ② 如果整型指针，如：`int *p` ，表示的是指向整型数据的指针变量。那么，数组指针，表示的就是指向数组的指针变量。
 
+> [!NOTE]
+>
+> ::: details 点我查看 一维数组指针和二维数组指针
+>
+> * 一维数组指针：指向一维数组的指针（使用居多）。
+>
+> ```c {2}
+> int arr[5] = {1, 2, 3, 4, 5};
+> int *p = arr;  // p 是指向 int 类型的指针，指向 arr[0]
+> ```
+>
+> * 二维数组指针：指向二维数组的指针。
+>
+> ```c {6}
+> int arr[3][4] = {
+>     {1, 2, 3, 4},
+>     {5, 6, 7, 8},
+>     {9, 10, 11, 12}
+> };
+> 
+> int (*p)[4] = arr;  // p 是指向包含 4 个整数的数组的指针，指向 arr[0] 
+> ```
+>
+> :::
+
+> [!NOTE]
+>
+> ::: details 点我查看 一维数组指针的应用场景
+>
+> **一维数组指针**常用于动态数组、函数参数传递、数组遍历等场景。它简单、高效，尤其适用于处理一维数据结构。
+>
+> * ① **动态数组管理**：当我们需要在运行时动态分配一维数组的内存时，指针能够提供更大的灵活性，如：使用 `malloc` 或 `new` 动态分配一维数组并通过指针访问。
+>
+> ```c
+> int *arr = (int *)malloc(sizeof(int) * 10);  // 动态分配10个整数的空间
+> // 使用指针操作数组
+> for (int i = 0; i < 10; i++) {
+>     *(arr + i) = i * i;
+> }
+> free(arr);  // 释放动态内存
+> ```
+>
+> * ② **函数参数传递**：一维数组通常通过指针传递给函数，而不是整个数组。这样可以避免数组复制，提高性能，如：处理数据时通过指针传递数组，减少内存开销。
+>
+> ```c
+> void processArray(int *arr, int size) {
+>     for (int i = 0; i < size; i++) {
+>         printf("%d ", *(arr + i));
+>     }
+> }
+> int main() {
+>     int arr[5] = {1, 2, 3, 4, 5};
+>     processArray(arr, 5);  // 传递数组指针
+>     return 0;
+> }
+> ```
+>
+> * ③ **数组遍历和操作**：当我们需要在一个一维数组上进行遍历和操作时，指针提供了更加灵活的方式，尤其是在处理大型数据时，可以通过指针直接访问内存位置，效率较高。
+>
+> ```c
+> int arr[5] = {1, 2, 3, 4, 5};
+> int *p = arr;
+> while (p < arr + 5) {
+>     printf("%d ", *p);
+>     p++;
+> }
+> ```
+>
+> * ④ **数组与指针混合使用**：有时数组与指针结合使用，尤其是在处理多维数组时，一维数组指针可以方便地访问和修改数组的元素。这种方式适合在不需要多维数组指针时使用。
+>
+> ```c
+> int arr[3][4] = {
+>     {1, 2, 3, 4},
+>     {5, 6, 7, 8},
+>     {9, 10, 11, 12}
+> };
+> int *p = &arr[0][0];
+> printf("%d\n", *(p + 5));  // 访问 arr[1][1]，值为6
+> ```
+>
+> :::
+
+> [!NOTE]
+>
+> ::: details 点我查看 二维数组指针的应用场景
+>
+> **二维数组指针**适合用于处理复杂的二维数据（矩阵、表格、图像等），尤其在需要动态分配内存、优化内存布局时非常有用。
+>
+> * ① **处理二维动态数组**：当我们需要动态创建二维数组时，使用二维数组指针可以灵活地分配和访问内存，如：创建一个动态的矩阵，在内存中分配一个二维数组的指针并进行操作。
+>
+> ```c
+> int **arr;
+> int rows = 3, cols = 4;
+> arr = (int **)malloc(rows * sizeof(int *));  // 分配指向行的指针
+> for (int i = 0; i < rows; i++) {
+>     arr[i] = (int *)malloc(cols * sizeof(int));  // 分配每行的列
+> }
+> 
+> // 填充二维数组
+> for (int i = 0; i < rows; i++) {
+>     for (int j = 0; j < cols; j++) {
+>         arr[i][j] = i * j;
+>     }
+> }
+> 
+> // 释放内存
+> for (int i = 0; i < rows; i++) {
+>     free(arr[i]);
+> }
+> free(arr);
+> ```
+>
+> * ② **矩阵操作**：在处理矩阵（如图像处理、科学计算、机器学习等领域）时，二维数组指针非常常见。通过二维数组指针可以方便地操作每行的元素。
+>
+> ```c
+> void printMatrix(int (*arr)[4], int rows) {
+>     for (int i = 0; i < rows; i++) {
+>         for (int j = 0; j < 4; j++) {
+>             printf("%d ", arr[i][j]);
+>         }
+>         printf("\n");
+>     }
+> }
+> 
+> int main() {
+>     int arr[3][4] = {
+>         {1, 2, 3, 4},
+>         {5, 6, 7, 8},
+>         {9, 10, 11, 12}
+>     };
+>     printMatrix(arr, 3);  // 输出整个矩阵
+>     return 0;
+> }
+> ```
+>
+> * ③ **多维数组的处理**：二维数组指针也可以用来处理更高维度的数据。通过指针逐层访问数据，可以处理复杂的数据结构，如：三维数组、四维数组等。
+>
+> ```c
+> void process3DArray(int (*arr)[4][3], int depth) {
+>     for (int i = 0; i < depth; i++) {
+>         for (int j = 0; j < 4; j++) {
+>             for (int k = 0; k < 3; k++) {
+>                 printf("%d ", arr[i][j][k]);
+>             }
+>             printf("\n");
+>         }
+>     }
+> }
+> 
+> int main() {
+>     int arr[2][4][3] = {
+>         {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}, {10, 11, 12}},
+>         {{13, 14, 15}, {16, 17, 18}, {19, 20, 21}, {22, 23, 24}}
+>     };
+>     process3DArray(arr, 2);  // 输出三维数组
+>     return 0;
+> }
+> ```
+>
+> :::
+
 * `指针数组`（Array of Pointers）：数组可以用来存放一系列相同类型的数据，那么数组也可以用来存放指针，这种用来`存放指针的数组`就被称为`指针数组`。
 
 > [!NOTE]
 >
 > * ① `指针数组`是`数组`，用来存放指针的数组。
 > * ② `指针数组`要求存放在数组中的指针的`数据类型必须一致`。
+
+> [!NOTE]
+>
+> ::: details 点我查看 指针数组的应用场景
+>
+> * ① **字符数组**：直接定义一个字符数组来存储多个字符串时，每个字符串需要事先指定大小。字符数组内的字符串是固定长度的，通常需要分配一个足够大的内存空间来存储最长的字符串。
+>
+> ```c
+> char strArr[4][20] = {"Hello", "World", "C", "Programming"}; 
+> ```
+>
+> * ② **指针数组**：指针数组更灵活，因为每个指针元素都可以指向不同长度的字符串，且不需要预先知道字符串的长度。
+>
+> ```c
+> char *strArr[] = {"Hello", "World", "C", "Programming"};
+> ```
+>
+> :::
 
 ## 1.2 数组指针相关的概念
 
@@ -474,28 +653,34 @@ double *p = &d;
 
 * 一级指针也是变量，也有自己的内存地址，并且指针变量只能保存内存地址，所以指针变量也可以指向一级指针，即：二级指针，如下所示：
 
-```c {5}
+```c 
 int num = 10;
 
-int *p = &num; // 表示 p 指针所指向的是一个 int 类型的数据，简称 int 指针
+// 表示 p 指针所指向的是一个 int 类型的数据，简称 int 指针
+int *p = &num; 
 
-int **pp = &p; // 表示 pp 指针所指向的是一个 int* 类型的数据，简称 int 二级指针
+// 表示 pp 指针所指向的是一个 int* 类型的数据，简称 int 二级指针
+int **pp = &p; // [!code highlight]
 ```
 
-```c {5}
+```c
 char c = 'a';
 
-char *p = &c; // 表示 p 指针所指向的是一个 char 类型的数据，简称 char 指针
+// 表示 p 指针所指向的是一个 char 类型的数据，简称 char 指针
+char *p = &c; 
 
-char **pp = &p; // 表示 pp 指针所指向的是一个 char* 类型的数据，简称 char 二级指针
+// 表示 pp 指针所指向的是一个 char* 类型的数据，简称 char 二级指针
+char **pp = &p; // [!code highlight]
 ```
 
-```c {5}
+```c 
 double d = 3.14;
 
-double *p = &d; // 表示 p 指针所指向的是一个 double 类型的数据，简称 double 指针
+// 表示 p 指针所指向的是一个 double 类型的数据，简称 double 指针
+double *p = &d; 
 
-double **pp = &p; // 表示 pp 指针所指向的是一个 double* 类型的数据，简称 double 二级指针
+// 表示 pp 指针所指向的是一个 double* 类型的数据，简称 double 二级指针
+double **pp = &p; // [!code highlight]
 ```
 
 * 其内存简图，就是这样的，如下所示：
@@ -1576,9 +1761,491 @@ int main() {
 
 
 
-# 第七章：void* 指针（⭐）
+# 第七章：空指针、野指针和悬空指针（⭐）
 
 ## 7.1 概述
+
+* 在学习 C/C++ 的时候，不可避免的会遇到`空指针`、`野指针`和`悬空指针`的概念。
+
+## 7.2 空指针
+
+### 7.2.1 概述
+
+* 在 C 语言中，`空指针`通常通过 `NULL` 来表示。`NULL` 是一个常量，表示指针没有指向任何有效的内存位置。
+
+> [!NOTE]
+>
+> 使用场景：
+>
+> * ① 空指针常用于初始化指针，表明指针尚未指向任何有效的内存。
+> * ② 空指针可以作为函数返回值，表示“无效”或“错误”。
+> * ③ 空指针可以作为“结束标志”或“未找到”的标识。
+
+> [!CAUTION]
+>
+> * ① 空指针本身不会引发问题，但如果程序尝试访问或解引用空指针，就会导致`段错误`，进而使得程序崩溃！！！
+> * ② 空指针并不可怕，因为现代的编译平台会使得程序直接崩溃，并不会引起`未定义行为`。
+
+
+
+* 示例：
+
+```c
+#include <stdio.h>
+
+int main() {
+
+    // 禁用 stdout 缓冲区
+    setbuf(stdout, NULL);
+    
+    // 初始化为空指针
+    int *ptr = NULL;  // [!code highlight]
+    // 检查指针是否为空
+    if (ptr == NULL) { 
+        printf("ptr is null\n");  
+    }
+
+    return 0;
+}
+```
+
+
+
+* 示例：
+
+```c
+#include <stdio.h>
+
+int main() {
+
+    // 禁用 stdout 缓冲区
+    setbuf(stdout, NULL);
+
+    int *ptr = NULL;
+    // 错误：解引用空指针，程序崩溃
+    *ptr = 10; // [!code error]
+
+    return 0;
+}
+```
+
+### 7.2.2 解决方案
+
+* ① 在使用指针之前，始终检查指针是否为空。
+* ② 在函数中返回空指针的时候，调用者应该处理返回值为 `NULL` 的情况。
+
+
+
+* 示例：
+
+```c
+#include <stdio.h>
+
+void printValue(const int *ptr) {
+    // 检查指针是否为空
+    if (ptr != NULL) { // [!code highlight]
+        printf("Value: %d\n", *ptr);
+    } else {
+        printf("Error: Pointer is NULL.\n");
+    }
+}
+
+int main() {
+
+    // 禁用 stdout 缓冲区
+    setbuf(stdout, NULL);
+
+    int num = 10;
+    
+    // 正常情况，指针指向有效地址
+    int *ptr = &num; // [!code highlight]
+    printValue(ptr); // [!code highlight]
+
+    // 空指针情况
+    ptr = NULL; // [!code highlight]
+    printValue(ptr); // [!code highlight]
+
+    return 0;
+}
+```
+
+
+
+* 示例：
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+// 返回一个指向整数的指针，模拟在某些条件下返回 NULL
+int *getPointer(int condition) {
+    if (condition) {
+        int *ptr = (int *)malloc(sizeof(int));
+        *ptr = 100; 
+        // 返回一个指向有效数据的指针
+        return ptr; // [!code highlight]
+    } else {
+        // 返回空指针
+        return NULL; // [!code highlight]
+    }
+}
+
+int main() {
+
+    // 禁用 stdout 缓冲区
+    setbuf(stdout, NULL);
+
+    int *ptr = getPointer(1); // 尝试获取一个有效的指针
+    if (ptr != NULL) { // [!code highlight]
+        printf("Got pointer with value: %d\n", *ptr);
+        free(ptr); // 记得释放内存
+    } else {
+        printf("Error: No valid pointer returned.\n");
+    }
+
+    ptr = getPointer(0); // 此次会返回空指针
+    if (ptr != NULL) { // [!code highlight]
+        printf("Got pointer with value: %d\n", *ptr);
+        free(ptr); // 记得释放内存
+    } else {
+        printf("Error: No valid pointer returned.\n");
+    }
+
+    return 0;
+}
+```
+
+## 7.3 野指针
+
+### 7.3.1 概述
+
+* 在 C 语言中，任何指向随机、未知、非法的内存区域的指针都是`野指针`。
+
+> [!NOTE]
+>
+> 原因：
+>
+> * ① 未初始化的指针：指针在声明时没有被初始化，指向一个未知的内存地址，可能是随机值。
+> * ② 释放后的指针：指针指向的内存已经被释放（调用 `free` ），但指针仍然保持着原来的值。
+
+> [!CAUTION]
+>
+> * ① 野指针会导致程序访问非法内存，可能引发`段错误`或者`未定义行为`。
+> * ② 由于它指向的内存地址是不确定的，任何对其的访问都可能导致程序崩溃或错误的数据操作。
+
+
+
+* 示例：
+
+```c
+#include <stdio.h>
+
+int main() {
+
+    // 禁用 stdout 缓冲区
+    setbuf(stdout, NULL);
+
+    // 声明了一个指针，但没有初始化
+    int *ptr;  // [!code highlight]
+    // 此时 ptr 是野指针，访问未知地址
+    *ptr = 10; // [!code error]
+
+    return 0;
+}
+```
+
+
+
+* 示例：
+
+```c
+#include <stdio.h>
+
+int main() {
+    
+    // 禁用 stdout 缓冲区
+    setbuf(stdout, nullptr);
+
+    int arr[10] = {0};
+
+    int *p = arr;
+
+    for (int i = 0; i <= 10; i++, p++) { // [!code error]
+        *p = i; // i=10 时越界
+        printf("arr[%d] = %d ", i, *p);
+    }
+
+    return 0;
+}
+```
+
+### 7.3.2 解决方案
+
+* ① 在声明指针时，要进行初始化；如果不知道初始化什么地址，最好先初始化为 `NULL`。
+* ② 在解引用一个指针变量之前，如果不确定它是否为 `NULL`，可以先判 `NULL`。
+
+
+
+* 示例：
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+
+    // 禁用 stdout 缓冲区
+    setbuf(stdout, NULL);
+
+    // 初始化为 NULL
+    int *ptr = NULL;  // [!code highlight]
+
+    // 判 NULL
+    if (ptr == NULL) { // [!code highlight]
+        printf("Pointer is uninitialized (NULL).\n");
+    } else {
+        printf("Pointer is initialized.\n");
+    }
+
+    return 0;
+}
+```
+
+
+
+* 示例：
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+void safeDereference(const int *ptr) {
+    if (ptr != NULL) { // [!code highlight]
+        printf("Value: %d\n", *ptr); // 安全解引用
+    } else {
+        printf("Error: Cannot dereference a NULL pointer.\n");
+    }
+}
+
+int main() {
+
+    // 禁用 stdout 缓冲区
+    setbuf(stdout, NULL);
+
+    // 空指针
+    int *ptr1 = NULL; // [!code highlight]
+    int value = 10;
+    // 有效指针
+    int *ptr2 = &value;
+
+    safeDereference(ptr1); // 尝试解引用空指针
+    safeDereference(ptr2); // 安全解引用有效指针
+
+
+    return 0;
+}
+```
+
+## 7.4 悬空指针
+
+### 7.4.1 概述
+
+* 在 C 语言中，`悬空指针`指的是“曾经指向有效内存区域，但是由于内存被释放销毁而没有改变指向，从而指向非法内存区域的指针”。
+
+> [!NOTE]
+>
+> 原因：
+>
+> * ① 函数返回一个指向局部变量的指针，局部变量的生命周期结束后，该指针就变成了悬空指针。
+> * ② 指针指向一个手动分配的内存区域（malloc），之后被 free 了，该指针就变成了悬空指针。
+
+> [!CAUTION]
+>
+> * ① 访问悬空指针会导致程序访问无效的内存，可能引发`段错误`或者`未定义行为`。
+> * ② 悬空指针尤其在动态内存管理中常见，是内存泄漏和程序崩溃的常见原因之一。
+> * ③ 悬空指针是野指针的一种特殊的情况，悬空指针就是野指针。
+
+> [!NOTE]
+>
+> ::: details 点我查看 C 语言中函数不允许返回数组；但是，可以返回指针，应该怎样返回？
+>
+> * ① 返回一个静态存储期限的变量或常量的指针。
+>
+> ```c
+> #include <stdio.h>
+> 
+> int* get_static_var_pointer() {
+>     // 静态变量
+>     static int static_var = 42; // [!code highlight]     
+>     // 返回指向静态变量的指针
+>     return &static_var; // [!code highlight]      
+> }
+> 
+> int main() {
+> 
+>     int* ptr = get_static_var_pointer();
+> 
+>     printf("%d\n", *ptr);  // 输出 42
+> 
+>     return 0;
+> }
+> ```
+>
+> * ② 返回参数传递的指针（较少使用）：因为参数传递进来的指针，它指向的数据，一定是函数调用者可以访问到的。
+>
+> ```c
+> #include <stdio.h>
+> 
+> int* update_value(int* ptr) { // [!code highlight]
+>     // 修改指针指向的数据
+>     *ptr = 100;  
+>     // 返回传递的指针 
+>     return ptr;  // [!code highlight]     
+> }
+> 
+> int main() {
+>     int value = 42;
+>     printf("Before: %d\n", value);  // 输出 42
+> 
+>     // 获取返回的指针
+>     int* updated_ptr = update_value(&value);
+> 
+>     // 使用返回的指针进行输出
+>     printf("After: %d\n", *updated_ptr);  // 输出 100
+> 
+>     return 0;
+> }
+> ```
+>
+> * ③ 返回堆区动态内存分配的指针，需要注意手动管理内存（大多数情况）。
+>
+> ```c
+> #include <stdio.h>
+> #include <stdlib.h>
+> 
+> // 函数声明，返回一个整型指针
+> int* createArray(int size) {
+>     // 从堆中分配内存
+>     int* arr = malloc(size * sizeof(int));   // [!code highlight]     
+>     if (arr == NULL) {
+>         printf("Memory allocation failed.\n");
+>         return NULL;  // 内存分配失败时返回 NULL
+>     }
+>     for (int i = 0; i < size; i++) {
+>         arr[i] = i * i;  // 初始化数组元素
+>     }
+>     // 返回指向数组的指针 
+>     return arr;  // [!code highlight]     
+> }
+> 
+> int main() {
+>     int n = 5;
+>     int* myArray = createArray(n);  // 调用函数并接收返回的指针
+>     if (myArray != NULL) {
+>         for (int i = 0; i < n; i++) {
+>             printf("%d ", myArray[i]);  // 打印数组元素
+>         }
+>         printf("\n");
+>         free(myArray);  // 释放内存
+>     }
+>     return 0;
+> }
+> ```
+>
+> :::
+
+
+
+* 示例：
+
+```c
+#include <stdio.h>
+
+int *getPointer() {
+    int num = 10;
+    // 返回指向局部变量的指针，局部变量超出作用域后指针悬空
+    return &num; // [!code error]
+}
+
+int main() {
+
+    // 禁用 stdout 缓冲区
+    setbuf(stdout, NULL);
+
+    int *p = getPointer();
+    printf("p = %d\n", *p);
+
+
+    return 0;
+}
+```
+
+
+
+* 示例：
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+
+    // 禁用 stdout 缓冲区
+    setbuf(stdout, NULL);
+
+    // 动态分配内存
+    int *ptr = (int *)malloc(sizeof(int));
+    // 释放内存
+    free(ptr);
+    // ptr 成为悬空指针，访问已释放的内存
+    *ptr = 20; // [!code error]
+
+    return 0;
+}
+```
+
+### 7.4.2 解决方案
+
+* ① 千万不要返回当前栈区的指针，它一定是一个野指针。
+* ② 在释放指针指向的内存后，应立即将指针设置为 `NULL`，避免指针变成悬空指针。
+
+
+
+* 示例：
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+
+    // 禁用 stdout 缓冲区
+    setbuf(stdout, NULL);
+
+    // 动态分配内存
+    int *ptr = (int *)malloc(sizeof(int));
+    // 释放内存
+    free(ptr);
+    // 防止悬空指针
+    ptr = NULL; // [!code highlight]
+    // ptr 是空指针
+    if (ptr != NULL) {
+        *ptr = 20;
+        printf("ptr = %d\n", *ptr);
+    } else {
+        printf("ptr is NULL\n");
+    }
+
+
+    return 0;
+}
+```
+
+
+
+# 第八章：void* 指针（⭐）
+
+## 8.1 概述
 
 * 在 C 语言中，`void` 关键字通常在函数定义中使用，有两个作用：
 
@@ -1614,7 +2281,7 @@ int main() {
 > * ① 如果你学过 Java 语言，可能将 `void*` 理解为 `Object` 类，`Object` 类是所有类的父类，一些通用的功能都在 `Object` 类中，如：`toString()` 方法，`getClass()` 方法等。
 > * ② 但是，C 语言中的 `void*`是不安全的，因为 `void*` 没有任何类型信息，在使用的时候，如果不能正确的进行类型转换，将对程序的安全性构成危险。
 
-## 7.2 应用示例
+## 8.2 应用示例
 
 * 需求：使用 C 语言提供的动态分配函数 `malloc()`，申请可以用于存储 `30` 个字符的内存空间。
 
@@ -1647,7 +2314,7 @@ int main() {
 }
 ```
 
-## 7.3 应用示例
+## 8.3 应用示例
 
 * 需求：定义一个函数，用来交换两个变量记录的数据，要求具有通用性。
 
@@ -1789,3 +2456,75 @@ int main() {
 }
 ```
 
+
+
+# 第九章：arr 和 &arr 的区别（⭐）
+
+## 9.1 概述
+
+* 到这里，我们也许还会对 `arr` 和 `&arr` 之间的区别感觉困惑，这边再详细解释下。
+
+## 9.2 arr
+
+* 假设一个数组是这么定义的，如下所示：
+
+```c
+int arr[] = {1,2,3,4,5};
+```
+
+* 那么，数组名 `arr`在作为`函数参数`以及`参与表达式计算`的时候会退化为`指向第 0 个元素的指针`，如下所示：
+
+```c
+int *p = arr;
+```
+
+```c
+void printArray(int *p, int len){
+    ...
+}
+
+printArray(arr,sizeof(arr)/sizeof(arr[0]));
+```
+
+* 当然，此时数组名 `arr` 的类型是 `int*`，它的内存地址和数组第 `0` 个元素的内存地址相同，如下所示：
+
+![](./assets/14.svg)
+
+## 9.3 &arr
+
+* 假设一个数组是这么定义的，如下所示：
+
+```c
+int arr[] = {1,2,3,4,5};
+```
+
+* 如果给数组名加上 & ，即：&arr，就表示指向`数组变量`的指针，即：
+
+```c
+int (*p)[5] = &arr；
+```
+
+* 此时，`&arr` 的类型是 `int (*)[5]`，其实就是 `int[5] *`，它的内存地址和数组第 `0` 个元素的内存地址相同。
+
+> [!NOTE]
+>
+> ::: details 点我查看 为什么 `&arr` 的类型是 `int (*)[5]`，却不是 `int[5] *`？
+>
+> * ① C 语言的设计者 Dennis Ritchie 曾经这么评价 C 语言：“C 语言是一门简单的、有缺陷的，但大获成功的编程语言”。
+> * ② 之所以，`&arr` 的类型是  `int (*)[5]`，就是因为 C 追求的是简洁。如果 `&arr` 类型是 `int[5] *`，那么就可以在一行代码就声明许多变量，如：`int (*p)[5] = &arr,num = 10;`。
+> * ③ 这也和当时的计算机资源（CPU、内存等）非常有限有关系；所以，C 语言在设计时，充分考虑了硬件资源的限制，力求编写出高效的代码。
+>
+> ::: 
+
+> [!NOTE]
+>
+> ::: details 点我查看 为什么 `&arr` 的内存地址也和数组第 `0` 个元素的内存地址相同？
+>
+> * ① 对于一个 int 类型的变量 num 而言，其保存的是 num 变量的首地址。
+> * ② 同理，对于 `&arr` 而言，也是保存变量的首地址，即：数组第 0 个元素的内存地址。
+>
+> :::
+
+* 其内存示意图，如下所示：
+
+![](./assets/15.svg)
