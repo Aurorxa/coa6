@@ -14,8 +14,8 @@ export const zhSidebar: DefaultTheme.Sidebar = {
         { text: 'C 语言入门二', link: `/01_c/01_c-basic/05_${commonDirectoryName}/` },
         { text: '变量和常量', link: `/01_c/01_c-basic/06_${commonDirectoryName}/` },
         { text: '进制', link: `/01_c/01_c-basic/07_${commonDirectoryName}/` },
-        { text: '数据类型', link: `/01_c-basic/08_${commonDirectoryName}/` },
-        { text: '运算符', link: `/01_c-basic/09_${commonDirectoryName}/` },
+        { text: '数据类型', link: `/01_c/01_c-basic/08_${commonDirectoryName}/` },
+        { text: '运算符', link: `/01_c/01_c-basic/09_${commonDirectoryName}/` },
       ]
     },
     {
