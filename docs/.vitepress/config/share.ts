@@ -4,6 +4,9 @@ import { groupIconMdPlugin, groupIconVitePlugin, localIconLoader } from 'vitepre
 import { loadEnv } from 'vite'
 const mode = process.env.NODE_ENV || 'development'
 const { VITE_BASE_URL } = loadEnv(mode, process.cwd())
+import { pagefind, announcement } from './vite-plugin-config'
+import { pagefindPlugin } from 'vitepress-plugin-pagefind'
+import { AnnouncementPlugin } from 'vitepress-plugin-announcement'
 
 console.log('Mode:', process.env.NODE_ENV)
 console.log('VITE_BASE_URL:', VITE_BASE_URL)
@@ -55,7 +58,9 @@ export const sharedConfig = defineConfig({
         customIcon: {
           c: localIconLoader(import.meta.url, '../../public/iconify/c.svg'),
         },
-      }) //代码组图标
+      }), //代码组图标
+      pagefindPlugin(pagefind),
+      AnnouncementPlugin(announcement)
     ],
     server: {
       port: 28089

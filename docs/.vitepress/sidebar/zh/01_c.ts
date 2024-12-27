@@ -1,7 +1,7 @@
 import { DefaultTheme } from 'vitepress'
-import { commonDirectoryName } from '../utils/constant'
+import { commonDirectoryName } from '../../utils/constant'
 // 中文侧边栏
-export const zhSidebar: DefaultTheme.Sidebar = {
+export const zhCSidebar: DefaultTheme.Sidebar = {
   '/01_c': [
     {
       text: 'C 语言基础',
@@ -52,50 +52,4 @@ export const zhSidebar: DefaultTheme.Sidebar = {
       ]
     }
   ],
-  '/02_dsa/': [
-    {
-      text: '数据结构和算法基础',
-      collapsed: true,
-      items: [
-        { text: 'abc', link: `/02_dsa/` },
-      ]
-    },
-  ],
-  '/03_cma/': [
-    {
-      text: '计算机组成原理基础',
-      collapsed: true,
-      items: [
-        { text: 'abc', link: `/03_cma/` },
-      ]
-    },
-  ],
-  '/04_os/': [
-    {
-      text: '操作系统基础',
-      collapsed: true,
-      items: [
-        { text: 'abc', link: `/04_os/` },
-      ]
-    },
-  ],
-  '/05_net/': [
-    {
-      text: '计算机网络基础',
-      collapsed: true,
-      items: [
-        { text: 'abc', link: `/05_net/` },
-      ]
-    },
-  ],
-  '/06_dp/': [
-    {
-      text: '设计模式基础',
-      collapsed: true,
-      items: [
-        { text: 'abc', link: `/06_dp/` },
-      ]
-    },
-
-  ]
 }
