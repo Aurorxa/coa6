@@ -23,7 +23,6 @@ head:
 hero: 
   name: "计组6件套"
   text: "大、全、细"
-  tagline: "『C 语言、数据结构和算法、计算机组成原理、操作系统、计算机网络、设计模式』"
   image:  # text 和 tagline 区域旁的图片
     src: /logo.svg
     alt: "许大仙"
