@@ -5,24 +5,37 @@ import mediumZoom from 'medium-zoom'
 import { onMounted, watch, nextTick, h } from 'vue'
 import giscusTalk from 'vitepress-plugin-comment-with-giscus'
 import { useData, useRoute, inBrowser } from 'vitepress'
+import type { EnhanceAppContext } from 'vitepress'
 import Confetti from "./components/Confetti.vue"
+import TypeIt from "./components/TypeIt.vue"
 import SwitchLayout from './components/SwitchLayout.vue'
 import HomeUnderline from "./components/HomeUnderline.vue"
+import MouseClick from "./components/MouseClick.vue"
+import { NProgress } from 'nprogress-v2/dist/index.js'
+import {
+  NolebaseInlineLinkPreviewPlugin,
+} from '@nolebase/vitepress-plugin-inline-link-preview/client'
+import '@nolebase/vitepress-plugin-inline-link-preview/client/style.css'
 import 'nprogress-v2/dist/index.css'
 import "vitepress-markdown-timeline/dist/theme/index.css"
-import 'virtual:group-icons.css' //代码组样式
+import 'virtual:group-icons.css'
 import './style/index.css'
-import { NProgress } from 'nprogress-v2/dist/index.js'
+import xgplayer from "./components/Xgplayer.vue"
 
 export default {
   extends: DefaultTheme,
   Layout() {
     return h(SwitchLayout)
   },
-  enhanceApp({ app, router }) {
+  enhanceApp({ app, router }: EnhanceAppContext) {
     app.component('ArticleMetadata', ArticleMetadata)
-    app.component('confetti', Confetti)
+    app.component('Confetti', Confetti)
     app.component('HomeUnderline', HomeUnderline)
+    app.component('TypeIt', TypeIt)
+    app.component('MouseClick', MouseClick) //鼠标跟随组件
+    app.component('xgplayer', xgplayer) //鼠标跟随组件
+    app.use(NolebaseInlineLinkPreviewPlugin)
+
     if (inBrowser) {
       NProgress.configure({ showSpinner: false })
       // 手动定义 onBeforeRouteChange
@@ -30,13 +43,12 @@ export default {
         NProgress.start() // 开始进度条
       }
       // 在页面加载完成时停止进度条
-      router.onAfterRouteChanged = () => {
+      router.onAfterRouteChange = () => {
         NProgress.done() // 停止进度条
       }
     }
   },
   setup() {
-    // Get frontmatter and route
     const { frontmatter } = useData()
     const route = useRoute()
     const initZoom = () => {

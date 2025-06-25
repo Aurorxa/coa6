@@ -23,6 +23,7 @@ head:
 hero: 
   name: "计组6件套"
   text: "大、全、细"
+  tagline: "欢迎来到我的博客🎉"
   image:  # text 和 tagline 区域旁的图片
     src: /logo.svg
     alt: "许大仙"
@@ -30,25 +31,10 @@ hero:
   actions:
     - theme: brand
       text: "🏠首页"
-      link: "/"        
+      link: "/"
     - theme: alt
-      text: "C 语言"
-      link: "/01_c/01_c-basic/01_xdx/"
-    - theme: alt
-      text: "数据结构和算法"
-      link: "/02_dsa/"
-    - theme: alt
-      text: "计算机组成原理"
-      link: "/03_cma/"
-    - theme: alt
-      text: "操作系统"
-      link: "/04_os/"
-    - theme: alt
-      text: "计算机网络"
-      link: "/05_net/"
-    - theme: alt
-      text: "设计模式"
-      link: "/06_dp/"                        
+      text: "🎉快速开始"
+      link: "/guide"                        
 # 按钮下方的描述
 features:
   - icon: 🧠
@@ -62,7 +48,6 @@ features:
     details: "注意事项就这么几点：边界值、等价类、数据完整性原子性、死锁、空转、……"
 ---
 
-<confetti />
-<HomeUnderline />
+
 
 
